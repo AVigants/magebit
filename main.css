@@ -132,7 +132,6 @@ input[type=checkbox]{
 }
 input[type=checkbox]:checked{
     /* todo make custom checked box style */
-
 }
     /* todo add checkbox enabled style */
 label{
@@ -252,17 +251,25 @@ img{
     left: 140px;
     width: 400px;
 }
-input[type=email]{
+#email_form{
     position: absolute;
     top: 539px;
     left: 100px;
+}
+input[type=email]{
+
     width: 640px;
 }
 #tos{
     position: absolute;
+    display: flex;
+    align-items: center;
     top: 662px;
     left: 140px;
     width: 400px;
+}
+#tos span{
+    margin-left: 10px;
 }
 hr{
     position: absolute;
@@ -280,6 +287,17 @@ hr{
     width: 244px;    
     display: flex;
     justify-content: space-around;
+}
+#submit{
+    display: none;
+}
+#submit_btn{
+    position: absolute;
+    top: 15px;
+    left: 600px;
+}
+#submit_btn{
+    cursor: pointer;
 }
 /* #top_bar{
     display: flex;
