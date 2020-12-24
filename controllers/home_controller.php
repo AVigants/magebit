@@ -6,6 +6,7 @@
     $date_subscribed = '';
     $email_provider = '';
     $err_arr = [];
+    $successful_submit = false;
 
     //submit event
     if (isset($_POST['submit'])) {
@@ -32,22 +33,16 @@
             $err_arr[] = 'You must accept the terms and conditions';
         }
 
-        if ($err_arr) {
-            print_r($err_arr);
-        } else {
-                    // $salt = "o#A*&1*71^0'}[m";
-                    // $pass = $pass . $salt;
-                    // $pass = password_hash($pass, PASSWORD_DEFAULT);
-
+        if (!$err_arr) {
             $date_subscribed = date("Y-m-d H:i:s");
             $email_provider = substr($email, strpos($email, '@') + 1, strpos($email, '.') - strpos($email, '@') - 1);
 
             $sql = "INSERT INTO emails (email, email_provider, date_subscribed) VALUES ('$email', '$email_provider', '$date_subscribed')";
             DB::run($sql);
-            //victory screen for successful submit
+            $successful_submit = true;
         }
     }
 
     $form = new Home_view();
-    $form->html();
+    $form->html($err_arr, $successful_submit, $successful_submit);
 ?>

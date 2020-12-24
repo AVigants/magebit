@@ -21,31 +21,32 @@
             $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
             return $response;
         }
-        public function get_emails_from_db_order_by_date_asc(){
-            $sql = "SELECT * FROM emails ORDER BY date_subscribed ASC";
-            $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
-            return $response;
-        }
-        public function get_emails_from_db_order_by_name_asc(){
-            $sql = "SELECT * FROM emails ORDER BY email ASC";
-            $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
-            return $response;
-        }
-        public function get_emails_from_db_order_by_name_desc(){
-            $sql = "SELECT * FROM emails ORDER BY email DESC";
-            $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
-            return $response;
-        }
-        public function get_emails_from_db_filter_by_provider($email_provider){
-            $sql = "SELECT * FROM emails WHERE email_provider = '$email_provider'";
-            $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
-            return $response;
-        }
-        public function get_emails_from_db_by_reference($search_value){
-            $sql = "SELECT * FROM emails WHERE email LIKE '%" . "$search_value" . "%'";
+        
+        public function get_emails_with_conditions($order_by, $direction, $email_provider, $search_value){
+            $sql = '';
+            if(!$email_provider){
+                $sql = "SELECT * FROM emails WHERE email LIKE '%" . "$search_value" . "%' ORDER BY $order_by $direction";
+            } else{
+                $sql = "SELECT * FROM emails WHERE email_provider = '$email_provider' AND email LIKE '%" . "$search_value" . "%' ORDER BY $order_by $direction";
+            }
             $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
             return $response;
         }
 
+        public function get_emails_for_csv_exporting($id_arr){
+            $sql = "SELECT * FROM emails WHERE id IN (";
+            foreach ($id_arr as $key => $value){
+                $sql_chain = $value . ', ';
+                $sql = $sql . $sql_chain;
+            }
+            $sql = substr($sql, 0, -2);
+            $sql = $sql . ')';
+            $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
+            return $response;
+        }
     };
+
+
+
+
 ?>

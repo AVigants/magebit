@@ -37,42 +37,61 @@ class Email_view
     </style>
 </head>
 <body>
-    <label for="">
-        Filter emails whose providers are: 
-        <form method="POST">
-            <select name="filter" onchange="this.form.submit()">
-                <option value=""></option>
-                <?php foreach($this->distinct_email_providers as $email_provider){ ?>
-                    <option value="<?= $email_provider['email_provider'] ?>"> <?= $email_provider['email_provider'] ?> </option>
-                <?php } ?>
-            </select>
-            <noscript><input type="submit" value="Submit"></noscript>
-        </form>
-    </label>
+                    <!-- <form action="" method="POST">
+                        <select name="a" id="">
+                            <option value="name_desc">A</option>
+                        </select>
+                        <select name="b" id="">
+                            <option value="gmail">B</option>
+                        </select>
+                        <input type="text" name="c">
+                        <input type="submit" name="d">
+                    </form> <hr> <br> <br> <br> <br> -->
+    <form action="emails.php" method="POST">
+        <label for="">
+            Filter emails whose providers are: 
+                <select name="email_provider">
+                    <option value=""></option>
+                    <?php foreach($this->distinct_email_providers as $email_provider){ ?>
+                        <option value="<?= $email_provider['email_provider'] ?>" 
+                        <?= (isset($_POST['email_provider']) && $_POST['email_provider'] === $email_provider['email_provider']) ? "selected" : '' ?>> <?= $email_provider['email_provider'] ?> </option>
+                    <?php } ?>
+                </select>
+        </label>
+        <br> <br>
+
+        <label for="">
+            Order by:
+                <select name="order">
+                <?= isset($_POST['search']) ? $_POST['search'] : '' ?>
+                    <option value="date_desc" <?= (isset($_POST['order']) && $_POST['order'] === 'date_desc')? "selected" : ''?>>
+                        Date NEWEST
+                    </option>
+                    <option value="date_asc" <?= (isset($_POST['order']) && $_POST['order'] === 'date_asc')? "selected" : ''?>>
+                        Date OLDEST
+                    </option>
+                    <option value="name_asc" <?= (isset($_POST['order']) && $_POST['order'] === 'name_asc')? "selected" : ''?>>
+                        Name A-Z
+                    </option>
+                    <option value="name_desc" <?= (isset($_POST['order']) && $_POST['order'] === 'name_desc')? "selected" : ''?>>
+                        Name Z-A
+                    </option>
+                </select>
+        </label>
+        <br> <br>
+
+        <label for="">
+            <input type="search" name="search" placeholder="Search for an email..." 
+            value="<?= isset($_POST['search']) ? $_POST['search'] : '' ?>">
+        </label>
+        <br> <br>
+        <input type="submit" value="submit" name="submit">
+    </form>
     <br> <br>
 
-    <label for="">
-        Order by:
-        <form method="POST">
-            <select name="order" onchange="this.form.submit()">
-                <option value=""></option>
-                <option value="date_desc">Date NEWEST</option>
-                <option value="date_asc">Date OLDEST</option>
-                <option value="name_asc">Name A-Z</option>
-                <option value="name_desc">Name Z-A</option>
-            </select>
-            <noscript><input type="submit" value="Submit"></noscript>
-        </form>
-    </label>
-    <br> <br>
 
-    <label for="">
-        <form method="POST">
-            <input type="search" name="search" placeholder="Search for an email...">
-            <input type="submit" value="Search">
-        </form>
-    </label>
-    <br> <br>
+
+
     <table>
         <tr>
             <th>Email</th>
@@ -80,23 +99,24 @@ class Email_view
             <th>Date Subscribed</th>
             <th>Actions</th>
         </tr>
-        <?php foreach($this->emails as $email){ ?>
-            <tr id="<?= $email['id'] ?>">
-                <td><?= $email['email'] ?></td>
-                <td><?= $email['email_provider'] ?></td>
-                <td><?= $email['date_subscribed'] ?></td>
-                <td>
-                    <form method="POST">
-                        <input type="hidden" name="email_id" value="<?= $email['id'] ?>">
-                        <button type="submit" name="delete">Delete</button>
-                    </form>
-                    <label>CSV export
-                        <input type="checkbox">
-                    </label>
-                </td>
-            </tr>
-        <?php } ?>
+        <form action="emails.php" method="POST">
+            <?php foreach($this->emails as $email){ ?>
+                <tr id="<?= $email['id'] ?>">
+                    <td><?= $email['email'] ?></td>
+                    <td><?= $email['email_provider'] ?></td>
+                    <td><?= $email['date_subscribed'] ?></td>
+                    <td>
+                        <button type="submit" name="delete" value="<?= $email['id'] ?>">Delete</button>
+                        <label>CSV export
+                            <input type="checkbox" value="<?= $email['id'] ?>" name="csv[]">
+                        </label>
+                    </td>
+                </tr>
+            <?php } ?>
+            <input type="submit" value="Export as CSV">
+        </form>
     </table>
+
 </body>
 </html>
 

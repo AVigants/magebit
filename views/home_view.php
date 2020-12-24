@@ -1,7 +1,7 @@
 <?php
 class Home_view
 {
-    public function html()
+    public function html($err_arr, $successful_submit)
     {
 ?>
 
@@ -31,27 +31,32 @@ class Home_view
                 </div>
 
             </div>
-            <p class="heading" id="heading">Subscribe to newsletter</p>
-            <p class="subheading" id="subheading">Subscribe to our newsletter and get 10% discount on pineapple glasses.
+            <p class="heading" id="heading"><?= $successful_submit? 'Thanks for subscribing!' : 'Subscribe to newsletter' ?></p>
+            <p class="subheading" id="subheading">
+            <?= $successful_submit? 'You have successfully subscribed to our email listing. Check your email for the discount code.' : 'Subscribe to our newsletter and get 10% discount on pineapple glasses.' ?>
             </p>
             <div id="input">
-                <form action="" method="POST" id="form">
-                    <div id="email_form">
-                        <input type="email" name="email" id="email" placeholder="Type your email address here..." autofocus> <br>
-                        <label for="email" class="subheading" id="errors"></label>
-                        <label class="heading" id="submit_btn">
-                            <input type="submit" id="submit" name="submit">
-                            <i class="fas fa-long-arrow-alt-right"></i>
-                        </label>
-                    </div>
-                        
-                        <label id="tos">
-                            <input type="checkbox" name="tos" id="tos_btn">
-                            <span class="subheading">
-                                I agree to <a href="#" class="link">terms of service</a>
-                            </span>
-                        </label>
-                </form>
+                <?php if(!$successful_submit){ ?>
+                    <form action="home.php" method="POST" id="form">
+                        <div id="email_form">
+                            <input type="email" name="email" id="email" placeholder="Type your email address here..." autofocus> <br>
+                            <label for="email" class="subheading" id="errors">
+                                <?= $err_arr ? $err_arr[0] : '' ?>
+                            </label>
+                            <label class="heading" id="submit_btn">
+                                <input type="submit" id="submit" name="submit">
+                                <i class="fas fa-long-arrow-alt-right"></i>
+                            </label>
+                        </div>
+                            
+                            <label id="tos">
+                                <input type="checkbox" name="tos" id="tos_btn">
+                                <span class="subheading">
+                                    I agree to <a href="#" class="link">terms of service</a>
+                                </span>
+                            </label>
+                    </form>
+                <?php } ?>
             </div>
             <hr>
             <div id="social_icons">
@@ -84,7 +89,7 @@ class Home_view
     </div>
 
 
-    <!-- <script src="./public/scripts/app.js"></script> -->
+    <script src="./public/scripts/app.js"></script>
 </body>
 
 </html>
