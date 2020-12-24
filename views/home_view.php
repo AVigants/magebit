@@ -1,3 +1,10 @@
+<?php
+class Home_view
+{
+    public function html()
+    {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pineapple.</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./public/assets/main.css">
 </head>
 
 <body>
@@ -28,12 +35,12 @@
             <p class="subheading" id="subheading">Subscribe to our newsletter and get 10% discount on pineapple glasses.
             </p>
             <div id="input">
-                <form action="" method="" id="form">
+                <form action="" method="POST" id="form">
                     <div id="email_form">
                         <input type="email" name="email" id="email" placeholder="Type your email address here..." autofocus> <br>
                         <label for="email" class="subheading" id="errors"></label>
                         <label class="heading" id="submit_btn">
-                            <input type="submit" id="submit">
+                            <input type="submit" id="submit" name="submit">
                             <i class="fas fa-long-arrow-alt-right"></i>
                         </label>
                     </div>
@@ -72,12 +79,17 @@
         </div>
 
         <div id="right">
-            <img src="https://picsum.photos/1600/1080" alt="">
+            <img src="./public/assets/images/image_summer.png" alt="">
         </div>
     </div>
 
 
-    <script src="app.js"></script>
+    <!-- <script src="./public/scripts/app.js"></script> -->
 </body>
 
 </html>
+
+<?php
+    }
+}
+?>

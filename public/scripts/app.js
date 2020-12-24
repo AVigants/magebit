@@ -43,7 +43,7 @@ form.addEventListener('submit', e=>{
     if(errors.textContent || !email || !tos){
         e.preventDefault();
     } else{
-        e.preventDefault();
+        //todo add thank you for registering
         form.style.display = 'none';
         document.getElementById('heading').textContent = 'Thanks for subscribing!'
         document.getElementById('subheading').textContent = 'You have successfully subscribed to our email listing. Check your email for the discount code.'
