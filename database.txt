@@ -1,0 +1,40 @@
+CREATE TABLE emails (
+    id INT NOT NULL AUTO_INCREMENT,
+    email VARCHAR (255) NOT NULL,
+	email_provider VARCHAR (255) NOT NULL,
+	date_subscribed DATETIME,
+	PRIMARY KEY (id)
+);
+insert into emails (id, email, email_provider, date_subscribed) values (1, 'nnuton0@gmail.com', 'gmail', '2020-05-13 00:10:51');
+insert into emails (id, email, email_provider, date_subscribed) values (2, 'tduigenan1@gmail.com', 'gmail', '2020-09-03 08:50:22');
+insert into emails (id, email, email_provider, date_subscribed) values (3, 'jparkman2@gmail.com', 'gmail', '2020-02-08 15:01:01');
+insert into emails (id, email, email_provider, date_subscribed) values (4, 'sdugood3@gmail.com', 'gmail', '2020-03-05 06:56:53');
+insert into emails (id, email, email_provider, date_subscribed) values (5, 'llorey4@gmail.com', 'gmail', '2019-12-25 23:27:43');
+insert into emails (id, email, email_provider, date_subscribed) values (6, 'imceachern5@gmail.com', 'gmail', '2020-12-13 04:42:14');
+insert into emails (id, email, email_provider, date_subscribed) values (7, 'grieflin6@gmail.com', 'gmail', '2020-01-01 09:14:58');
+insert into emails (id, email, email_provider, date_subscribed) values (8, 'cmortel7@gmail.com', 'gmail', '2020-06-28 20:07:19');
+insert into emails (id, email, email_provider, date_subscribed) values (9, 'slewzey8@gmail.com', 'gmail', '2020-07-13 23:03:44');
+insert into emails (id, email, email_provider, date_subscribed) values (10, 'jtreweke9@gmail.com', 'gmail', '2020-10-22 22:02:51');
+insert into emails (id, email, email_provider, date_subscribed) values (11, 'ccundicta@gmail.com', 'gmail', '2020-07-16 10:32:25');
+insert into emails (id, email, email_provider, date_subscribed) values (12, 'mmincinib@gmail.com', 'gmail', '2020-08-21 22:54:40');
+insert into emails (id, email, email_provider, date_subscribed) values (13, 'tthomac@gmail.com', 'gmail', '2020-02-02 16:55:39');
+insert into emails (id, email, email_provider, date_subscribed) values (14, 'cfraanchyonokd@gmail.com', 'gmail', '2020-02-11 00:56:58');
+insert into emails (id, email, email_provider, date_subscribed) values (15, 'fferrarie@gmail.com', 'gmail', '2020-04-03 18:35:51');
+insert into emails (id, email, email_provider, date_subscribed) values (16, 'skeunef@gmail.com', 'gmail', '2020-05-03 17:05:06');
+insert into emails (id, email, email_provider, date_subscribed) values (17, 'tscarrattg@gmail.com', 'gmail', '2020-07-02 20:53:53');
+insert into emails (id, email, email_provider, date_subscribed) values (18, 'nyarkerh@gmail.com', 'gmail', '2020-05-02 21:08:39');
+insert into emails (id, email, email_provider, date_subscribed) values (19, 'abeati@yahoo.com', 'yahoo', '2020-07-13 13:37:55');
+insert into emails (id, email, email_provider, date_subscribed) values (20, 'khartwrightj@yahoo.com', 'yahoo', '2020-05-28 17:02:52');
+insert into emails (id, email, email_provider, date_subscribed) values (21, 'dmartinak@yahoo.com', 'yahoo', '2020-07-19 11:22:07');
+insert into emails (id, email, email_provider, date_subscribed) values (22, 'esimmenl@yahoo.com', 'yahoo', '2020-03-26 02:11:29');
+insert into emails (id, email, email_provider, date_subscribed) values (23, 'mswadenm@yahoo.com', 'yahoo', '2020-03-02 04:15:26');
+insert into emails (id, email, email_provider, date_subscribed) values (24, 'sfavelln@yahoo.com', 'yahoo', '2020-08-21 06:46:44');
+insert into emails (id, email, email_provider, date_subscribed) values (25, 'sdesforgeso@yahoo.com', 'yahoo', '2020-06-27 18:49:27');
+insert into emails (id, email, email_provider, date_subscribed) values (26, 'lparfreyp@yahoo.com', 'yahoo', '2020-03-05 11:57:10');
+insert into emails (id, email, email_provider, date_subscribed) values (27, 'mminnockq@yahoo.com', 'yahoo', '2020-05-21 03:36:11');
+insert into emails (id, email, email_provider, date_subscribed) values (28, 'eallsoppr@yahoo.com', 'yahoo', '2020-06-16 09:26:28');
+insert into emails (id, email, email_provider, date_subscribed) values (29, 'eantunezs@yahoo.com', 'yahoo', '2020-03-09 04:35:15');
+insert into emails (id, email, email_provider, date_subscribed) values (30, 'hsimmanst@yahoo.com', 'yahoo', '2020-03-24 04:50:29');
+insert into emails (id, email, email_provider, date_subscribed) values (31, 'spautardu@yahoo.com', 'yahoo', '2020-06-12 18:45:56');
+insert into emails (id, email, email_provider, date_subscribed) values (32, 'mpittsv@yahoo.com', 'yahoo', '2020-05-26 05:32:35');
+insert into emails (id, email, email_provider, date_subscribed) values (33, 'bdilnotw@yahoo.com', 'yahoo', '2020-10-02 04:00:59');
