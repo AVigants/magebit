@@ -31,20 +31,24 @@ class Email_view
         th, td {
             padding: 10px;
         }
-        form{
-            display:inline-block;
-        }
+        
     </style>
 </head>
 <body>
-    <form action="emails.php" method="POST">
+    <form action="emails.php" method="get">
+        <?php if($this->total_pages > 1){ ?>
+            <span>Page:</span>
+            <?php for($page = 1; $page <= $this->total_pages; $page++){ ?>
+                <input type="submit" name="page" value="<?= $page ?>">
+        <?php } } ?>
+        <br> <br>
         <label for="">
             Filter emails whose providers are: 
                 <select name="email_provider">
                     <option value=""></option>
                     <?php foreach($this->distinct_email_providers as $email_provider){ ?>
                         <option value="<?= $email_provider['email_provider'] ?>" 
-                        <?= (isset($_POST['email_provider']) && $_POST['email_provider'] === $email_provider['email_provider']) ? "selected" : '' ?>> <?= $email_provider['email_provider'] ?> </option>
+                        <?= (isset($_GET['email_provider']) && $_GET['email_provider'] === $email_provider['email_provider']) ? "selected" : '' ?>> <?= $email_provider['email_provider'] ?> </option>
                     <?php } ?>
                 </select>
         </label>
@@ -53,17 +57,17 @@ class Email_view
         <label for="">
             Order by:
                 <select name="order">
-                <?= isset($_POST['search']) ? $_POST['search'] : '' ?>
-                    <option value="date_desc" <?= (isset($_POST['order']) && $_POST['order'] === 'date_desc')? "selected" : ''?>>
+                <?= isset($_GET['search']) ? $_GET['search'] : '' ?>
+                    <option value="date_desc" <?= (isset($_GET['order']) && $_GET['order'] === 'date_desc')? "selected" : ''?>>
                         Date NEWEST
                     </option>
-                    <option value="date_asc" <?= (isset($_POST['order']) && $_POST['order'] === 'date_asc')? "selected" : ''?>>
+                    <option value="date_asc" <?= (isset($_GET['order']) && $_GET['order'] === 'date_asc')? "selected" : ''?>>
                         Date OLDEST
                     </option>
-                    <option value="name_asc" <?= (isset($_POST['order']) && $_POST['order'] === 'name_asc')? "selected" : ''?>>
+                    <option value="name_asc" <?= (isset($_GET['order']) && $_GET['order'] === 'name_asc')? "selected" : ''?>>
                         Name A-Z
                     </option>
-                    <option value="name_desc" <?= (isset($_POST['order']) && $_POST['order'] === 'name_desc')? "selected" : ''?>>
+                    <option value="name_desc" <?= (isset($_GET['order']) && $_GET['order'] === 'name_desc')? "selected" : ''?>>
                         Name Z-A
                     </option>
                 </select>
@@ -72,10 +76,10 @@ class Email_view
 
         <label for="">
             <input type="search" name="search" placeholder="Search for an email..." 
-            value="<?= isset($_POST['search']) ? $_POST['search'] : '' ?>">
+            value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
         </label>
         <br> <br>
-        <input type="submit" value="submit" name="submit">
+        <input type="submit" value="search">
     </form>
     <br> <br>
 
@@ -100,15 +104,10 @@ class Email_view
                     </td>
                 </tr>
             <?php } ?>
+    </table>
+    <br>
             <input type="submit" value="Export as CSV">
         </form>
-    </table>
-
-    <ul class="pagination">
-        <li><a href="?page=1">First Page</a></li>
-
-        <li><a href="?page=<?php echo $this->total_pages; ?>">Last Page</a></li>
-    </ul>
 
 </body>
 </html>

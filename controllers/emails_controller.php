@@ -6,14 +6,14 @@
     $model = new Email_model();
     
     $emails = [];
-    
-    if (isset($_GET['page'])) {
-        $page = $_GET['page'];
-    } else {
-        $page = 1;
-    }
     $no_of_records_per_page = 10;
-    $offset = ($page-1) * $no_of_records_per_page;
+
+    if (isset($_GET['page'])) {
+        $current_page = $_GET['page'];
+    } else {
+        $current_page = 1;
+    }
+    $offset = ($current_page-1) * $no_of_records_per_page;
 
     if(isset($_POST['delete'])){
         $model->delete_email_from_db($_POST['delete']);
@@ -33,13 +33,13 @@
         fclose($fh);
     } 
 
-    if(isset($_POST['submit'])){
+    if(isset($_GET['order'])){
         $order_by = '';
         $direction = '';
         $email_provider = '';
         $search_value = '';
 
-        switch ($_POST['order']) {
+        switch ($_GET['order']) {
             case 'date_desc':
                 $order_by = 'date_subscribed';
                 $direction = 'DESC';
@@ -58,29 +58,28 @@
                 break;
         }
 
-        if(isset($_POST['search'])){
-            $search_value = $_POST['search'];
+        if(isset($_GET['search'])){
+            $search_value = $_GET['search'];
             $search_value = strip_tags($search_value);
             $search_value = strtolower($search_value);
             $search_value = str_replace(' ', '', $search_value);
             $search_value = htmlspecialchars($search_value);
         }
 
-        if(isset($_POST['email_provider'])){
-            $email_provider = $_POST['email_provider'];
+        if(isset($_GET['email_provider'])){
+            $email_provider = $_GET['email_provider'];
         }
-        $emails = $model->get_emails_with_conditions($order_by, $direction, $email_provider, $search_value);
-        } else{
-            $total_email_count = $model->get_count();
-            $total_pages = ceil($total_email_count/$no_of_records_per_page);
-            echo 'Showing ' . $offset . '-' . ($offset+10) . ' of ' . $total_email_count;
-            $emails = $model->get_emails($offset, $no_of_records_per_page);
+
+        $total_email_count = $model->get_emails_count($email_provider, $search_value);
+        $total_pages = ceil($total_email_count/$no_of_records_per_page);
+
+        $emails = $model->get_emails($order_by, $direction, $email_provider, $search_value, $offset, $no_of_records_per_page);
+    } else {
+        $total_email_count = $model->get_emails_count('', '');
+        $total_pages = ceil($total_email_count/$no_of_records_per_page);
+        $emails = $model->get_emails('date_subscribed', 'DESC', '', '', $offset, $no_of_records_per_page);
     }
     
-    
-
-
-
     $distinct_email_providers = $model->get_distinct_email_providers();
     $form = new Email_view($emails, $distinct_email_providers, $total_pages);
     $form->html();
