@@ -2,12 +2,12 @@
 
 class Email_view
 {
-    private $emails;
-    // private $email_providers;
-    public function __construct($emails = [], $distinct_email_providers = [])
+    // private $emails;
+    public function __construct($emails = [], $distinct_email_providers = [], $total_pages)
     {
         $this->emails = $emails;
         $this->distinct_email_providers = $distinct_email_providers;
+        $this->total_pages = $total_pages;
     }
     public function html()
     {
@@ -37,16 +37,6 @@ class Email_view
     </style>
 </head>
 <body>
-                    <!-- <form action="" method="POST">
-                        <select name="a" id="">
-                            <option value="name_desc">A</option>
-                        </select>
-                        <select name="b" id="">
-                            <option value="gmail">B</option>
-                        </select>
-                        <input type="text" name="c">
-                        <input type="submit" name="d">
-                    </form> <hr> <br> <br> <br> <br> -->
     <form action="emails.php" method="POST">
         <label for="">
             Filter emails whose providers are: 
@@ -89,9 +79,6 @@ class Email_view
     </form>
     <br> <br>
 
-
-
-
     <table>
         <tr>
             <th>Email</th>
@@ -116,6 +103,12 @@ class Email_view
             <input type="submit" value="Export as CSV">
         </form>
     </table>
+
+    <ul class="pagination">
+        <li><a href="?page=1">First Page</a></li>
+
+        <li><a href="?page=<?php echo $this->total_pages; ?>">Last Page</a></li>
+    </ul>
 
 </body>
 </html>

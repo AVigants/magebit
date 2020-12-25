@@ -6,10 +6,19 @@
     $model = new Email_model();
     
     $emails = [];
+    
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 1;
+    }
+    $no_of_records_per_page = 10;
+    $offset = ($page-1) * $no_of_records_per_page;
 
     if(isset($_POST['delete'])){
         $model->delete_email_from_db($_POST['delete']);
     }
+
     if(isset($_POST['csv'])){
         $csv_data = $_POST['csv'];
         $csv_data_from_db = $model->get_emails_for_csv_exporting($csv_data);
@@ -62,11 +71,17 @@
         }
         $emails = $model->get_emails_with_conditions($order_by, $direction, $email_provider, $search_value);
         } else{
-        $emails = $model -> get_emails_from_db_order_by_date_desc();
+            $total_email_count = $model->get_count();
+            $total_pages = ceil($total_email_count/$no_of_records_per_page);
+            echo 'Showing ' . $offset . '-' . ($offset+10) . ' of ' . $total_email_count;
+            $emails = $model->get_emails($offset, $no_of_records_per_page);
     }
+    
+    
+
+
 
     $distinct_email_providers = $model->get_distinct_email_providers();
-
-    $form = new Email_view($emails, $distinct_email_providers);
+    $form = new Email_view($emails, $distinct_email_providers, $total_pages);
     $form->html();
 ?>

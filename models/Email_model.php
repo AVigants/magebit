@@ -44,6 +44,19 @@
             $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
             return $response;
         }
+
+        public function get_count(){
+            $sql = "SELECT COUNT(email) AS num_emails FROM emails";
+            $response = DB::run($sql)->fetch_assoc();
+            $num_emails = $response['num_emails'];
+            return $num_emails;
+        }
+        
+        public function get_emails($offset, $no_of_records_per_page){
+            $sql = "SELECT * FROM emails LIMIT $offset, $no_of_records_per_page"; 
+            $response = DB::run($sql)->fetch_all(MYSQLI_ASSOC);
+            return $response;
+        }
     };
 
 
