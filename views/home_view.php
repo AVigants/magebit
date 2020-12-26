@@ -53,11 +53,12 @@ class Home_view
                                     <div id="arrow">
                                     </div>
                                 </label>
+                                <label for="email" class="subheading" id="errors">
+                                    <?= $err_arr ? $err_arr[0] : '' ?>
+                                </label>
                             </div>
                             <br>
-                            <label for="email" class="subheading" id="errors">
-                                <?= $err_arr ? $err_arr[0] : '' ?>
-                            </label>
+                            
 
                         </div>
 
